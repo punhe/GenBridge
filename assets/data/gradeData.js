@@ -37,17 +37,17 @@ export const detailedGrades = {
   ],
 };
 
-// Function to calculate the average score for HK1 and HK2 based on detailed grades
 const calculateSemesterAverage = (grades) => {
   const totalScore = grades.reduce((sum, item) => sum + item.score, 0);
   return (totalScore / grades.length).toFixed(2);
 };
 
-// Generate summary grade data based on detailed grades
 export const gradeData = Object.keys(detailedGrades).map((subject) => {
-  const averageHK1 = calculateSemesterAverage(detailedGrades[subject].slice(0, 2)); // First two entries for HK1
-  const averageHK2 = calculateSemesterAverage(detailedGrades[subject].slice(2)); // Last two entries for HK2
-  
+  const hk1Grades = detailedGrades[subject].slice(0, 2); // First two entries for HK1
+  const hk2Grades = detailedGrades[subject].slice(2); // Last two entries for HK2
+  const averageHK1 = calculateSemesterAverage(hk1Grades);
+  const averageHK2 = calculateSemesterAverage(hk2Grades);
+
   return {
     subject,
     HK1: averageHK1,

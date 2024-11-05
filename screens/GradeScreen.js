@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
-import { gradeData, detailedGrades } from '../assets/data/gradeData'; // Assume detailedGrades is additional data
+import { gradeData, detailedGrades } from '../assets/data/gradeData';
 
 const GradeScreen = () => {
   const [expandedSubject, setExpandedSubject] = useState(null);
@@ -10,7 +10,7 @@ const GradeScreen = () => {
   };
 
   const calculateAverage = (key) => {
-    const total = gradeData.reduce((sum, item) => sum + (item[key] || 0), 0);
+    const total = gradeData.reduce((sum, item) => sum + parseFloat(item[key]), 0);
     return (total / gradeData.length).toFixed(2);
   };
 

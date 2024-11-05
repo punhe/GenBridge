@@ -110,7 +110,7 @@ export default function HomeScreen() {
         {/** ========================= Khu vực Giáo viên =========================== */}
         <View className="mt-2">
           <SectionHeader
-            title={'Giáo viên nổi bật'}
+            title={'Giáo viên phụ trách'}
             onFilterPress={() => setTeachersFilterVisible(!teachersFilterVisible)}
             tintColor={teachersFilterVisible ? themeColors.bgPurple : themeColors.lightGrayText}
           />

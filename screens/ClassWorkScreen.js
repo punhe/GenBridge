@@ -1,102 +1,121 @@
-import React from 'react';
-import { SafeAreaView, View, Text, StyleSheet, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { SafeAreaView, StyleSheet, ScrollView } from 'react-native';
+import { Text, List, Appbar } from 'react-native-paper';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const ClassWorkScreen = () => {
+  const [expanded, setExpanded] = useState({});
+
+  const handlePress = (subject) => {
+    setExpanded((prev) => ({
+      ...prev,
+      [subject]: !prev[subject],
+    }));
+  };
+
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.header}>GenBridge</Text>
-      <Text style={styles.subHeader}>Bài tập</Text>
+      <Appbar.Header>
+        <Appbar.Content title="GenBridge" subtitle="Bài tập" />
+      </Appbar.Header>
 
-      <ScrollView contentContainerStyle={styles.gridContainer}>
-        <View style={styles.subjectBox}>
-          <Text style={styles.subjectText}>Toán</Text>
-          <Text style={styles.assignmentText}>Bài 1,2,3 trang 94</Text>
-          <Text style={styles.dueDateText}>Hạn nộp: 3/10</Text>
-        </View>
-
-        <View style={styles.subjectBox}>
-          <Text style={styles.subjectText}>Tiếng Việt</Text>
-          <Text style={styles.assignmentText}>Bài 1,2,3 trang 80</Text>
-          <Text style={styles.dueDateText}>Hạn nộp: 4/10</Text>
-        </View>
-
-        <View style={styles.subjectBox}>
-          <Text style={styles.subjectText}>Tiếng Anh</Text>
-          <Text style={styles.assignmentText}>Chép 20 từ vựng</Text>
-          <Text style={styles.dueDateText}>Hạn nộp: 3/10</Text>
-        </View>
-
-        <View style={styles.subjectBox}>
-          <Text style={styles.subjectText}>Đạo đức</Text>
-          <Text style={styles.assignmentText}>Chưa có</Text>
-        </View>
-
-        <View style={styles.subjectBox}>
-          <Text style={styles.subjectText}>Tự nhiên và Xã hội</Text>
-          <Text style={styles.assignmentText}>Chưa có</Text>
-        </View>
-
-        <View style={styles.subjectBox}>
-          <Text style={styles.subjectText}>Giáo dục thể chất</Text>
-          <Text style={styles.assignmentText}>Chưa có</Text>
-        </View>
+      <ScrollView>
+        <List.Section>
+          {assignments.map((assignment, index) => (
+            <List.Accordion
+              key={index}
+              title={assignment.subject}
+              description={assignment.task}
+              left={(props) => <List.Icon {...props} icon={assignment.icon} />}
+              expanded={!!expanded[assignment.subject]}
+              onPress={() => handlePress(assignment.subject)}
+              style={[
+                styles.accordion,
+                !assignment.details && styles.disabledAccordion,
+              ]}
+              titleStyle={[
+                styles.title,
+                !assignment.details && styles.disabledText,
+              ]}
+              descriptionStyle={[
+                styles.description,
+                !assignment.details && styles.disabledText,
+              ]}
+            >
+              {assignment.details ? (
+                assignment.details.map((detail, i) => (
+                  <List.Item key={i} title={detail} />
+                ))
+              ) : (
+                <List.Item title="Chưa có bài tập" />
+              )}
+            </List.Accordion>
+          ))}
+        </List.Section>
       </ScrollView>
     </SafeAreaView>
   );
 };
 
+const assignments = [
+  {
+    subject: 'Toán',
+    task: 'Bài 1,2,3 trang 94',
+    dueDate: '3/10',
+    icon: 'calculator',
+    details: ['Bài 1: Phép cộng', 'Bài 2: Phép trừ', 'Bài 3: Phép nhân'],
+  },
+  {
+    subject: 'Tiếng Việt',
+    task: 'Bài 1,2,3 trang 80',
+    dueDate: '4/10',
+    icon: 'book',
+    details: ['Bài 1: Chính tả', 'Bài 2: Tập đọc', 'Bài 3: Ngữ pháp'],
+  },
+  {
+    subject: 'Tiếng Anh',
+    task: 'Chép 20 từ vựng',
+    dueDate: '3/10',
+    icon: 'alphabetical',
+    details: ['Danh sách từ vựng'],
+  },
+  {
+    subject: 'Đạo đức',
+    task: 'Chưa có',
+    icon: 'account-group',
+  },
+  {
+    subject: 'Tự nhiên và Xã hội',
+    task: 'Chưa có',
+    icon: 'earth',
+  },
+  {
+    subject: 'Giáo dục thể chất',
+    task: 'Chưa có',
+    icon: 'run',
+  },
+];
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    padding: 16,
   },
-  header: {
-    fontSize: 28,
+  accordion: {
+    backgroundColor: '#FFFFFF',
+    marginBottom: 5,
+  },
+  disabledAccordion: {
+    backgroundColor: '#F0F0F0',
+  },
+  title: {
     fontWeight: 'bold',
-    color: '#FF6F61',
-    textAlign: 'center',
-    marginVertical: 15,
+    color: '#000000',
   },
-  subHeader: {
-    fontSize: 20,
-    fontWeight: '600',
-    textAlign: 'center',
-    color: '#FF6F61',
-    marginBottom: 20,
+  description: {
+    color: '#555555',
   },
-  gridContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-  },
-  subjectBox: {
-    width: '45%',
-    padding: 20,
-    marginVertical: 12,
-    borderRadius: 12,
-    backgroundColor: '#FFF3E0',
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowOffset: { width: 2, height: 2 },
-    shadowRadius: 4,
-    elevation: 3,
-    alignItems: 'center',
-  },
-  subjectText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#FF6F61',
-    marginBottom: 8,
-  },
-  assignmentText: {
-    fontSize: 14,
-    color: '#555',
-    marginBottom: 4,
-  },
-  dueDateText: {
-    fontSize: 12,
-    color: '#888',
+  disabledText: {
+    color: '#B0B0B0',
   },
 });
 
