@@ -1,9 +1,8 @@
-import { View, Text, Pressable, FlatList, ScrollView } from 'react-native';
+import { View, Text, Pressable, FlatList, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import HeaderText from '../components/headerText';
-import { getLocalGreeting } from '../utils/helpers';
 import SearchInput from '../components/home/searchInput';
 import { MagnifyingGlassIcon, AdjustmentsVerticalIcon } from 'react-native-heroicons/outline';
 import { themeColors } from '../theme';
@@ -12,7 +11,6 @@ import { areaFilters, institutionData, subjectFilters, teacherData } from '../as
 import InstitutionItem from '../components/home/institutionItem';
 import SectionHeader from '../components/home/sectionHeader';
 import AreaFilter from '../components/home/areaFilter';
-import SubjectFilter from '../components/home/subjectFilter';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 
 export default function HomeScreen() {
@@ -21,9 +19,9 @@ export default function HomeScreen() {
   const [attendanceStatus, setAttendanceStatus] = useState('Đã đến lớp');
   const [teachers, setTeachers] = useState(teacherData);
   const [institutions, setInstitutions] = useState(institutionData);
-  const [SelectedSubject, setSelectedSubject] = useState();
   const [teachersFilterVisible, setTeachersFilterVisible] = useState(false);
   const [institutionsFilterVisible, setInstitutionsFilterVisible] = useState(false);
+  const [dropdownVisible, setDropdownVisible] = useState(false);
 
   const handleSearchChange = (searchQuery) => {
     setSearchQuery(searchQuery);
@@ -38,16 +36,40 @@ export default function HomeScreen() {
     setInstitutions(filteredInstitutions);
   };
 
+  const getLocalGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) {
+      return 'Chào buổi sáng';
+    } else if (hour < 18) {
+      return 'Chào buổi chiều';
+    } else {
+      return 'Chào buổi tối';
+    }
+  };
+
+  const handleSignOut = () => {
+    navigation.navigate('SignIn');
+  };
+
   return (
     <SafeAreaView className="bg-bgWhite px-7 pt-5 pb-[-35px] flex-1">
       {/**============= Khu vực tiêu đề =================== */}
       <View className="flex flex-row items-center justify-between">
-        <View className="">
+        <View>
           <HeaderText text={getLocalGreeting()} />
           <Text className="font-exo font-semibold text-lg">Lê Mạnh Hùng</Text>
         </View>
-        <View className="bg-bgWhite shadow-xl rounded-xl">
-          <Icon name="user-circle" size={62} color={themeColors.darkGrayText} />
+        <View>
+          <Pressable onPress={() => setDropdownVisible(!dropdownVisible)}>
+            <Icon name="user-circle" size={62} color={themeColors.darkGrayText} />
+          </Pressable>
+          {dropdownVisible && (
+            <View style={styles.dropdownMenu}>
+              <TouchableOpacity onPress={handleSignOut} style={styles.dropdownItem}>
+                <Text style={styles.dropdownText}>Đăng xuất</Text>
+              </TouchableOpacity>
+            </View>
+          )}
         </View>
       </View>
 
@@ -66,7 +88,7 @@ export default function HomeScreen() {
             <AdjustmentsVerticalIcon size={28} color={themeColors.darkGrayText} />
           </Pressable>
         </View>
-        
+
         {/** Tình trạng đến lớp */}
         <Text className="text-darkGrayText text-lg mt-2">
           Hôm nay: <Text className="font-semibold text-green-600">{attendanceStatus}</Text>
@@ -108,24 +130,17 @@ export default function HomeScreen() {
 
       <ScrollView showsVerticalScrollIndicator={false} className="h-full w-full">
         {/** ========================= Khu vực Giáo viên =========================== */}
-        <View className="mt-2">
+        <View style={{ marginTop: 8 }}>
           <SectionHeader
             title={'Giáo viên phụ trách'}
             onFilterPress={() => setTeachersFilterVisible(!teachersFilterVisible)}
             tintColor={teachersFilterVisible ? themeColors.bgPurple : themeColors.lightGrayText}
           />
 
-          {teachersFilterVisible && (
-            <View className="flex flex-col my-5 space-y-2">
-              <AreaFilter filters={areaFilters} />
-              <SubjectFilter filters={subjectFilters} onSubjectSelect={(subject) => setSelectedSubject(subject)} />
-            </View>
-          )}
-
           <FlatList
             data={teachers}
             horizontal
-            className="w-full py-4 bg-transparent"
+            contentContainerStyle={{ paddingVertical: 16 }}
             renderItem={({ item }) => <TeacherItem teacher={item} />}
             keyExtractor={(item) => item.name}
             showsHorizontalScrollIndicator={false}
@@ -156,3 +171,30 @@ export default function HomeScreen() {
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  dropdownMenu: {
+    position: 'absolute',
+    right: 0,
+    top: 70, // Adjust this based on your layout
+    backgroundColor: 'white',
+    borderRadius: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 5,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    zIndex: 1000,
+    minWidth: 150, // Ensure there's enough width for the text
+  },
+  dropdownItem: {
+    padding: 8,
+  },
+  dropdownText: {
+    fontSize: 16,
+    color: 'red',
+    textAlign: 'left',
+  },
+});

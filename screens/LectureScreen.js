@@ -9,22 +9,27 @@ const images = {
 };
 
 const lectures = [
-  { id: 1, image: images.math, title: 'Phương trình bậc nhất', duration: '08:57', xp: 10, gold: 50 },
-  { id: 2, image: images.english, title: 'Phương trình bậc hai', duration: '12:21', xp: 10, gold: 50 },
-  { id: 3, image: images.literature, title: 'Điều kiện và số nghiệm', duration: '11:45', xp: 10, gold: 50 },
+  { id: 1, image: images.math, title: 'Phương trình bậc nhất', duration: '08:57' },
+  { id: 2, image: images.english, title: 'Phương trình bậc hai', duration: '12:21' },
+  { id: 3, image: images.literature, title: 'Điều kiện và số nghiệm', duration: '11:45' },
+  { id: 4, image: images.math, title: 'Luyện tập phương trình bậc nhất', duration: '09:30' },
+  { id: 5, image: images.english, title: 'Luyện tập phương trình bậc hai', duration: '13:50' },
+  { id: 6, image: images.literature, title: 'Luyện tập điều kiện và số nghiệm', duration: '10:10' },
 ];
 
-const LectureScreen = () => {
+const LectureScreen = ({ navigation }) => {
   return (
     <ScrollView style={styles.container}>
       {lectures.map((lecture) => (
-        <TouchableOpacity key={lecture.id} style={styles.item}>
+        <TouchableOpacity
+          key={lecture.id}
+          style={styles.item}
+          onPress={() => navigation.navigate('LectureDetail', { lecture })}
+        >
           <Image source={lecture.image} style={styles.image} />
           <View style={styles.info}>
             <Text style={styles.title}>{lecture.title}</Text>
-            <Text style={styles.metadata}>
-              {lecture.duration} • {lecture.xp} XP • {lecture.gold} Gold
-            </Text>
+            <Text style={styles.metadata}>{lecture.duration}</Text>
           </View>
         </TouchableOpacity>
       ))}

@@ -1,10 +1,10 @@
+import React from 'react';
 import {
   View,
   Text,
   Image,
   TouchableOpacity,
 } from 'react-native';
-import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { images } from '../assets';
@@ -14,7 +14,7 @@ import { EyeIcon } from 'react-native-heroicons/solid';
 
 const { signin } = images;
 
-export default function SignInScreen() {
+export default function TeacherSignInScreen() {
   const navigation = useNavigation();
 
   return (
@@ -27,7 +27,7 @@ export default function SignInScreen() {
 
         {/** ====================== Các ô nhập thông tin đăng nhập ============================= */} 
         <View className="flex flex-col w-full items-center justify-center mt-3">
-          <Input label={'Địa chỉ email'} placeholder={'nhập mail vào đây'} />
+          <Input label={'Email Giáo Viên'} placeholder={'teacher@example.com'} />
           <Input
             label={'Mật khẩu'}
             placeholder={'********'}
@@ -39,13 +39,13 @@ export default function SignInScreen() {
         {/** ====================== Nút hành động ============================= */} 
         <Button
           primaryBtnText={'Đăng Nhập'}
-          onPrimaryBtnPress={() => navigation.navigate('Home')}
+          onPrimaryBtnPress={() => navigation.navigate('TeacherHomeScreen')}
         />
 
-        {/** ====================== Đăng Nhập Giáo Viên (Text Link) ============================= */} 
-        <TouchableOpacity onPress={() => navigation.navigate('TeacherSignInScreen')}>
+        {/** ====================== Quay Lại Trang Đăng Nhập ============================= */} 
+        <TouchableOpacity onPress={() => navigation.goBack()}>
           <Text className="text-blue-600 text-center mt-4 underline">
-            Đăng Nhập Giáo Viên
+            Quay Lại Trang Đăng Nhập
           </Text>
         </TouchableOpacity>
       </View>

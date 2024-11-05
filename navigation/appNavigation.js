@@ -18,6 +18,15 @@ import LeaveRequestScreen from '../screens/LeaveRequestScreen';
 import ExamScreen from '../screens/ExamScreen';
 import { themeColors } from '../theme';
 import { images } from '../assets';
+import LectureDetail from '../screens/LectureDetail';
+import TeacherDetail from '../screens/TeacherDetail';
+import TeacherSignInScreen from '../screens/TeacherSignInScreen';
+import TeacherHomeScreen from '../screens/TeacherHomeScreen';
+import TeacherScheduleScreen from '../screens/TeacherScheduleScreen';
+import TeacherAttendanceScreen from '../screens/TeacherAttendanceScreen';
+import TeacherChatWithParentsScreen from '../screens/TeacherChatWithParentsScreen';
+import TeacherNotificationsScreen from '../screens/TeacherNotificationsScreen';
+import TeacherGradeScreen from '../screens/TeacherGradeSreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -34,6 +43,11 @@ export default function AppNavigation() {
         <Stack.Screen
           name="SignIn"
           component={LoginScreen}
+          options={{ headerShown: false }}
+        />
+         <Stack.Screen
+          name="TeacherSignInScreen"
+          component={TeacherSignInScreen}
           options={{ headerShown: false }}
         />
         <Stack.Screen
@@ -79,6 +93,11 @@ export default function AppNavigation() {
           options={{ title: 'Bài giảng, tài liệu học tập' }}
         />
         <Stack.Screen
+          name="LectureDetail"
+          component={LectureDetail}
+          options={{ title: 'Chi tiết bài giảng' }}
+        />
+        <Stack.Screen
           name="LeaveRequestScreen"
           component={LeaveRequestScreen}
           options={{ title: 'Xin nghỉ học' }}
@@ -87,6 +106,41 @@ export default function AppNavigation() {
           name="ExamScreen"
           component={ExamScreen}
           options={{ title: 'Bài kiểm tra, kì thi' }}
+        />
+        <Stack.Screen
+          name="TeacherDetail"
+          component={TeacherDetail}
+          options={{ title: 'Liên hệ với giáo viên' }}
+        />
+          <Stack.Screen
+          name="TeacherHomeScreen"
+          component={TeacherHomeScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="TeacherScheduleScreen"
+          component={TeacherScheduleScreen}
+          options={{ title: 'Lịch dạy' }}
+        />
+        <Stack.Screen
+          name="TeacherAttendanceScreen"
+          component={TeacherAttendanceScreen}
+          options={{ title: 'Điểm danh học sinh' }}
+        />
+        <Stack.Screen
+          name="TeacherChatWithParentsScreen"
+          component={TeacherChatWithParentsScreen}
+          options={{ title: 'Phụ huynh liên hệ' }}
+        />
+        <Stack.Screen
+          name="TeacherNotificationsScreen"
+          component={TeacherNotificationsScreen}
+          options={{ title: 'Thông báo' }}
+        />
+        <Stack.Screen
+          name="TeacherGradeScreen"
+          component={TeacherGradeScreen}
+          options={{ title: 'Chấm điểm học sinh' }}
         />
       </Stack.Navigator>
     </NavigationContainer>

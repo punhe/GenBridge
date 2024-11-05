@@ -31,24 +31,37 @@ export const teacherData = [
   {
     name: 'Đào Duy Tân',
     subject: 'Sinh học',
-    image: teacher1,
+    image: teacher1,  
+    description: 'Thầy Tân có hơn 10 năm kinh nghiệm giảng dạy Sinh học...',
+    experience: '10 years',
+    contact: 'tan.bio@example.com',
   },
   {
-    name: 'Đức hiếu',
+    name: 'Đức Hiếu',
     subject: 'Hóa học',
     image: teacher2,
+    description: 'Thầy Hiếu chuyên về Hóa học vô cơ...',
+    experience: '8 years',
+    contact: 'hieu.chem@example.com',
   },
   {
-    name: 'Lê Minh Tuấn',
-    subject: 'Khoa học máy tính',
+    name: 'Võ Thị Thu Thảo',
+    subject: 'Tiếng Anh',
     image: teacher4,
+    description: 'Cô Thảo chuyên giảng dạy tiếng Anh giao tiếp...',
+    experience: '6 years',
+    contact: 'thao.english@example.com',
   },
   {
-    name: 'Phạm Hồng Phúc',
-    subject: 'Vật lý',
+    name: 'Lê Mạnh Hùng',
+    subject: 'Toán',
     image: teacher3,
+    description: 'Thầy Hùng nổi tiếng với phương pháp giảng dạy Toán tư duy logic...',
+    experience: '12 years',
+    contact: 'hung.math@example.com',
   },
 ];
+
 
 export const institutionData = [
   {
