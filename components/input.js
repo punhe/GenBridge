@@ -1,35 +1,30 @@
-import { Text, TextInput, View } from 'react-native';
+import { View, Text, TextInput } from 'react-native';
 import React from 'react';
 
-const Input = ({ label, placeholder, last = false, Icon, value, onChange }) => {
+export default function Input({
+  label,
+  placeholder,
+  Icon,
+  last = false,
+  value,
+  onChangeText,
+  secureTextEntry = false
+}) {
   return (
-    <View
-      className={`flex flex-col gap-2 relative w-full ${last ? '' : 'mb-5'}`}
-    >
-      <Text className="font-exo font-semibold text-darkGrayText text-base">
-        {label}
-      </Text>
-      {/** ====================== Text Input ============================= */}
-      <View className="flex flex-row items-center justify-between px-4 bg-white h-12 rounded-lg shadow">
+    <View className={`w-full ${!last ? 'mb-6' : 'mb-2'}`}>
+      <Text className="text-gray-700 ml-4 mb-2">{label}</Text>
+      <View className="flex-row items-center border border-gray-300 p-4 rounded-2xl">
         <TextInput
-          className={
-            'font-exo flex items-center text-darkGrayText text-sm h-full w-full bg-white rounded-lg'
-          }
           placeholder={placeholder}
+          className="flex-1"
           value={value}
-          onChangeText={onChange}
-          secureTextEntry={label === 'Password'}
+          onChangeText={onChangeText}
+          secureTextEntry={secureTextEntry}
         />
-        {/** ====================== Optional Icon ============================= */}
-        {Boolean(Icon) ? (
-          <Icon
-            className="text-lightGrayText absolute right-0 mr-4"
-            size={20}
-          />
-        ) : null}
+        {Icon && (
+          <Icon size={20} color="gray" />
+        )}
       </View>
     </View>
   );
-};
-
-export default Input;
+}
