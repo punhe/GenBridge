@@ -45,6 +45,14 @@ export const teacherData = [
     contact: 'hieu.chem@example.com',
   },
   {
+    name: 'Thanh Tiền',
+    subject: 'Thể dục',
+    image: teacher3,
+    description: 'Thầy Tiền chuyên về kinh doanh',
+    experience: '8 years',
+    contact: 'tien.phys@example.com',
+  },
+  {
     name: 'Võ Thị Thu Thảo',
     subject: 'Tiếng Anh',
     image: teacher4,

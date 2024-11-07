@@ -45,11 +45,15 @@ export default function TeacherNotificationsScreen() {
       <Text style={styles.title}>Trang thông báo</Text>
 
       <View style={styles.toggleContainer}>
-        <TouchableOpacity onPress={() => setShowParentNotifications(false)} style={[styles.toggleButton, !showParentNotifications && styles.activeButton]}>
-          <Text style={styles.toggleText}>Thông báo Giáo viên</Text>
+        <TouchableOpacity 
+          onPress={() => setShowParentNotifications(false)} 
+          style={[styles.toggleButton, !showParentNotifications && styles.activeButton]}>
+          <Text style={[styles.toggleText, !showParentNotifications && styles.activeText]}>Thông báo Giáo viên</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => setShowParentNotifications(true)} style={[styles.toggleButton, showParentNotifications && styles.activeButton]}>
-          <Text style={styles.toggleText}>Thông báo Phụ huynh</Text>
+        <TouchableOpacity 
+          onPress={() => setShowParentNotifications(true)} 
+          style={[styles.toggleButton, showParentNotifications && styles.activeButton]}>
+          <Text style={[styles.toggleText, showParentNotifications && styles.activeText]}>Thông báo Phụ huynh</Text>
         </TouchableOpacity>
       </View>
 
@@ -91,24 +95,29 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: '#fff',
+    backgroundColor: '#f8f9fa', // Nền sáng nhẹ
   },
   title: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: 'bold',
+    color: '#007bff',
     marginBottom: 20,
+    textAlign: 'center',
   },
   toggleContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between', // Tạo khoảng cách đều giữa các nút
     marginBottom: 20,
+    paddingBottom: 10,
   },
   toggleButton: {
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 20,
+    flex: 1, // Đảm bảo mỗi nút chiếm đều không gian ngang
+    paddingVertical: 12,
+    borderRadius: 25,
     borderWidth: 1,
     borderColor: '#007bff',
+    alignItems: 'center',
+    marginHorizontal: 5, // Tạo khoảng cách giữa các nút
   },
   activeButton: {
     backgroundColor: '#007bff',
@@ -116,49 +125,56 @@ const styles = StyleSheet.create({
   toggleText: {
     fontSize: 16,
     color: '#007bff',
-    textAlign: 'center',
+  },
+  activeText: {
+    color: '#fff', // Màu chữ khi nút được chọn
   },
   notificationItem: {
     padding: 15,
     borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
+    borderBottomColor: '#eee',
+    marginVertical: 5,
+    backgroundColor: '#ffffff',
+    borderRadius: 10,
   },
   notificationTitle: {
     fontSize: 18,
     fontWeight: 'bold',
+    color: '#333',
   },
   notificationContent: {
     fontSize: 16,
-    color: '#666',
+    color: '#555',
   },
   notificationDate: {
     fontSize: 14,
-    color: '#aaa',
+    color: '#888',
     textAlign: 'right',
   },
   sectionTitle: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: 'bold',
+    color: '#007bff',
     marginTop: 20,
     marginBottom: 10,
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
-    padding: 10,
+    borderColor: '#ddd',
+    borderRadius: 8,
+    padding: 12,
     marginBottom: 10,
+    backgroundColor: '#f9f9f9',
   },
   addButton: {
     backgroundColor: '#007bff',
-    paddingVertical: 12,
-    paddingHorizontal: 20,
-    borderRadius: 5,
+    paddingVertical: 14,
+    borderRadius: 8,
     alignItems: 'center',
   },
   addButtonText: {
     color: '#fff',
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: '600',
   },
 });
