@@ -1,48 +1,101 @@
-import { View, Text, Image, TouchableOpacity, Pressable } from "react-native";
 import React from "react";
+import { View, Text, Image, Dimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
+import { LinearGradient } from "expo-linear-gradient";
 import { images } from "../assets";
 import Button from "../components/button";
 
 const { welcome } = images;
+const { width } = Dimensions.get("window");
 
 export default function WelcomeScreen() {
   const navigation = useNavigation();
+
   return (
-    <SafeAreaView className="flex-1 bg-bgWhite">
-      <View className="flex-1 flex justify-around my-4">
-        {/** ====================== Image =================================== */}
-        <View className="flex-row justify-center">
-          <Image
-            source={welcome}
-            style={{ width: 324, height: 324, borderRadius: 50 }}
-          />
-        </View>
-        <View className="flex flex-col items-center mt-[-20%]">
-          <Text className="text-4xl font-bold text-center text-primary">
-            GenBridge
-          </Text>
-        </View>
+    <LinearGradient
+      colors={["#E8F0FF", "#FFFFFF"]}
+      style={{ flex: 1 }}
+    >
+      <SafeAreaView style={{ flex: 1 }}>
+        <View style={{ flex: 1, justifyContent: "space-between", paddingVertical: 20, paddingHorizontal: 16 }}>
+          {/* Image Section */}
+          <View style={{ alignItems: "center", justifyContent: "center", flex: 1 }}>
+            <View
+              style={{
+                borderRadius: 40,
+                overflow: "hidden",
+                shadowColor: "#000",
+                shadowOpacity: 0.15,
+                shadowRadius: 10,
+                shadowOffset: { width: 0, height: 6 },
+              }}
+            >
+              <Image
+                source={welcome}
+                style={{
+                  width: width * 0.75,
+                  height: width * 0.75,
+                  borderRadius: 40,
+                }}
+                resizeMode="cover"
+              />
+            </View>
+          </View>
 
-        {/** ====================== Welcome Text ============================= */}
-        <View className="flex flex-col gap-2 mt-[-25%]">
-          <Text className="text-darkGrayText text-xl text-center font-exoSemibold">
-            {/* Kết nối để nuôi dưỡng tương lai của trẻ */}
-            Gắn kết để xây dựng tương lai của trẻ.
-          </Text>
-          <Text className="text-darkGrayText text-lg text-center font-exo">
-            Theo dõi và quản lý tiến độ học tập của học sinh một cách hiệu quả
-            và tiện lợi hơn bao giờ hết.
-          </Text>
-        </View>
+          {/* Text Section */}
+          <View style={{ marginTop: 24, paddingHorizontal: 12 }}>
+            <Text
+              style={{
+                fontSize: 28,
+                textAlign: "center",
+                color: "#2C3E50",
+                fontWeight: "600",
+                lineHeight: 36,
+              }}
+            >
+              Gắn kết để xây dựng tương lai
+            </Text>
+            <Text
+              style={{
+                fontSize: 16,
+                textAlign: "center",
+                color: "#34495E",
+                lineHeight: 24,
+                marginTop: 12,
+                opacity: 0.8,
+              }}
+            >
+              Theo dõi và quản lý tiến độ học tập của học sinh một cách hiệu quả, chính xác và dễ dàng hơn bao giờ hết.
+            </Text>
+          </View>
 
-        {/** ====================== Action button ============================= */}
-        <Button
-          primaryBtnText={"Bắt đầu thôi"}
-          onPrimaryBtnPress={() => navigation.navigate("SignIn")}
-        />
-      </View>
-    </SafeAreaView>
+          {/* Button Section */}
+          <View style={{ marginTop: 32, paddingHorizontal: 12 }}>
+            <Button
+              primaryBtnText="Bắt đầu ngay"
+              onPrimaryBtnPress={() => navigation.navigate("SignIn")}
+              style={{
+                width: "100%",
+                backgroundColor: "linear-gradient(90deg, #4CAF50, #81C784)",
+                borderRadius: 30,
+                paddingVertical: 14,
+                alignItems: "center",
+                justifyContent: "center",
+                shadowColor: "#000",
+                shadowOpacity: 0.2,
+                shadowRadius: 10,
+                shadowOffset: { width: 0, height: 6 },
+              }}
+              textStyle={{
+                color: "#FFFFFF",
+                fontSize: 18,
+                fontWeight: "bold",
+              }}
+            />
+          </View>
+        </View>
+      </SafeAreaView>
+    </LinearGradient>
   );
 }

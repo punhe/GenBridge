@@ -27,6 +27,7 @@ import TeacherAttendanceScreen from '../screens/TeacherAttendanceScreen';
 import TeacherChatWithParentsScreen from '../screens/TeacherChatWithParentsScreen';
 import TeacherNotificationsScreen from '../screens/TeacherNotificationsScreen';
 import TeacherGradeScreen from '../screens/TeacherGradeSreen';
+import FeePaymentScreen from '../screens/FeePaymentScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -105,6 +106,11 @@ export default function AppNavigation() {
         <Stack.Screen
           name="ExamScreen"
           component={ExamScreen}
+          options={{ title: 'Bài kiểm tra, kì thi' }}
+        />
+        <Stack.Screen
+          name="FeePayment"
+          component={FeePaymentScreen}
           options={{ title: 'Bài kiểm tra, kì thi' }}
         />
         <Stack.Screen
@@ -201,8 +207,8 @@ function BottomTabNavigator() {
         }}
       />
       <Tab.Screen
-        name="Bài tập"
-        component={ClassWorkScreen}
+        name="Học phí"
+        component={FeePaymentScreen}
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
@@ -215,7 +221,7 @@ function BottomTabNavigator() {
               }}
             />
           ),
-          tabBarLabel: 'Bài tập',
+          tabBarLabel: 'Học phí',
         }}
       />
     </Tab.Navigator>
