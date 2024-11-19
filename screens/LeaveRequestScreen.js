@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import React from "react";
+import { View, Text, TextInput, StyleSheet } from "react-native";
 
 const LeaveRequestScreen = () => {
   return (
@@ -16,10 +16,33 @@ const LeaveRequestScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, backgroundColor: '#fff' },
-  header: { fontSize: 24, fontWeight: 'bold', color: '#ff6347', marginBottom: 20 },
-  label: { fontSize: 16, marginVertical: 10 },
-  input: { borderWidth: 1, borderColor: '#ddd', padding: 10, borderRadius: 5, backgroundColor: '#f9f9f9' },
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: "#f3f4f6",
+  },
+  header: {
+    fontSize: 28,
+    fontWeight: "bold",
+    color: "#ff6347",
+    marginBottom: 30,
+    textAlign: "center",
+  },
+  label: {
+    fontSize: 18,
+    fontWeight: "600",
+    marginVertical: 10,
+    color: "#444",
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    padding: 12,
+    borderRadius: 8,
+    backgroundColor: "#fff",
+    marginBottom: 20,
+    fontSize: 16,
+  },
 });
 
 export default LeaveRequestScreen;

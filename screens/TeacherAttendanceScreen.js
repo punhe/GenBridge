@@ -1,13 +1,21 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, FlatList, Switch, TouchableOpacity, Alert } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  Switch,
+  TouchableOpacity,
+  Alert,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 // Sample data for students' attendance
 const initialStudents = [
-  { id: '1', name: 'Nguyễn Văn A', attended: false },
-  { id: '2', name: 'Trần Thị B', attended: false },
-  { id: '3', name: 'Lê Văn C', attended: false },
-  { id: '4', name: 'Phạm Thị D', attended: false },
+  { id: "1", name: "Nguyễn Văn A", attended: false },
+  { id: "2", name: "Trần Thị B", attended: false },
+  { id: "3", name: "Lê Văn C", attended: false },
+  { id: "4", name: "Phạm Thị D", attended: false },
 ];
 
 export default function TeacherAttendanceScreen() {
@@ -16,14 +24,16 @@ export default function TeacherAttendanceScreen() {
   const toggleAttendance = (id) => {
     setAttendance((prev) =>
       prev.map((student) =>
-        student.id === id ? { ...student, attended: !student.attended } : student
+        student.id === id
+          ? { ...student, attended: !student.attended }
+          : student
       )
     );
   };
 
   const saveAttendance = () => {
     // This function would normally save the attendance to a backend service
-    Alert.alert('Thành công', 'Trạng thái điểm danh đã được lưu.');
+    Alert.alert("Thành công", "Trạng thái điểm danh đã được lưu.");
   };
 
   return (
@@ -53,33 +63,37 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
+    fontWeight: "bold",
+    color: "#ff6347",
+    marginBottom: 30,
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
   },
   studentItem: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     padding: 15,
     borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
+    borderBottomColor: "#ccc",
   },
   name: {
     fontSize: 18,
   },
   saveButton: {
     marginTop: 20,
-    backgroundColor: '#007bff',
+    backgroundColor: "#007bff",
     paddingVertical: 15,
     borderRadius: 5,
-    alignItems: 'center',
+    alignItems: "center",
   },
   saveButtonText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
 });
